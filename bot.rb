@@ -84,7 +84,7 @@ def main
     puts Color::error(message)
     client.create_direct_message(target_user, message)
   else
-    puts Color::note("No defectors found 🙃")
+    puts "No defectors found 🙃"
   end
 
   puts "Saving updated state"
