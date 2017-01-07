@@ -25,7 +25,7 @@ class State
 
   def self.load
     begin
-      data = File.open(DATA_PATH) { |f| JSON.load(f) }
+      data = JSON.parse(File.read(DATA_PATH))
       State.new(data['followers'])
     rescue Errno::ENOENT
       puts Color::warn("Could not find data file; using default state!")
@@ -41,8 +41,8 @@ class State
   end
 
   def dump
-    data = { 'followers' => @followers }
-    File.atomic_write(DATA_PATH) { |f| JSON.dump(data, f) }
+    data = JSON.pretty_generate({ 'followers' => @followers })
+    File.atomic_write(DATA_PATH) { |f| f.write(data) }
   end
 end
 
