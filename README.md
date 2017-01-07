@@ -2,7 +2,7 @@
 
 ![Hakase presents a Snickers candy bar to her sister, Nano](snickers.jpg)
 
-This repository contains code for [my Twitter bot][nanojoshu]. Right now it has the following features:
+[**@nanojoshu**][nanojoshu] (なの助手, *Assistant Nano*) is the name of my Twitter bot. This repository contains the code that runs it. Right now it has the following features:
 
 * Sends a direct message whenever someone unfollows me on Twitter
 
