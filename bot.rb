@@ -34,8 +34,17 @@ class State
   end
 
   def update(current_followers)
-    current_followers = Hash[current_followers.map { |user| [user.screen_name, user.name] }]
-    unfollowers = @followers.clone.delete_if { |screen_name| current_followers.has_key? screen_name }
+    current_followers = Hash[
+      current_followers.map { |user| [
+        # In JSON, hash keys must be strings not integers
+        user.id.to_s,
+        {
+          'screen_name' => user.screen_name,
+          'name' => user.name
+        }
+      ]}
+    ]
+    unfollowers = @followers.clone.delete_if { |id| current_followers.has_key? id }
     @followers = current_followers
     unfollowers
   end
@@ -78,8 +87,8 @@ def main
 
   unless unfollowers.empty?
     message = "Heads up! These horrible people had the nerve to unfollow you:"
-    unfollowers.sort.each do |screen_name, name|
-      message << "\n • #{name} (@#{screen_name})"
+    unfollowers.sort_by { |id, user| user['screen_name'] }.each do |id, user|
+      message << "\n • #{user['name']} (@#{user['screen_name']})"
     end
     puts Color::error(message)
     client.create_direct_message(target_user, message)
