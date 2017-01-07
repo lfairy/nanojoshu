@@ -94,7 +94,7 @@ end
 if __FILE__ == $0
   begin
     main
-  rescue => e
+  rescue
     puts  # Make sure the stack trace is on a separate line
     puts Color::fatal(" 🚫 ERROR! 🚫 ")
     raise
