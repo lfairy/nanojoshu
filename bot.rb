@@ -10,7 +10,7 @@ module Color
   def self.error(s) "\e[37m\e[45m#{s}#{NORMAL}" end
   def self.warn(s) "\e[37m\e[43m#{s}#{NORMAL}" end
   def self.note(s) "\e[37m\e[44m#{s}#{NORMAL}" end
-  def self.title(s) "\e[47m#{s}#{NORMAL}" end
+  def self.title(s) "\e[30m\e[47m#{s}#{NORMAL}" end
 end
 
 class State
