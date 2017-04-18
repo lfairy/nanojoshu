@@ -3,7 +3,7 @@ Description=Assistant Nano
 After=network.target
 
 [Service]
-ExecStart=/srv/nanojoshu/run.sh
+ExecStart=/srv/nanojoshu/nanojoshu
 EnvironmentFile=/etc/environment
 WorkingDirectory=/srv/nanojoshu
 User=chris

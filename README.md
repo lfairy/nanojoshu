@@ -29,7 +29,7 @@
 
     Fill out the remaining four fields with values from [apps.twitter.com]. Make sure you set permissions to "Read, Write and Access direct messages" before generating the tokens.
 
-3. Start the bot with `./run.sh`.
+3. Start the bot with `./nanojoshu`.
 
 [Ruby]: https://www.ruby-lang.org
 [Bundler]: https://bundler.io
