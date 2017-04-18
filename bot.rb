@@ -4,15 +4,6 @@ require 'active_support/core_ext/file'
 require 'json'
 require 'twitter'
 
-module Color
-  NORMAL = "\e[30m\e(B\e[m"
-  def self.fatal(s) "\e[37m\e[41m#{s}#{NORMAL}" end
-  def self.error(s) "\e[37m\e[45m#{s}#{NORMAL}" end
-  def self.warn(s) "\e[37m\e[43m#{s}#{NORMAL}" end
-  def self.note(s) "\e[37m\e[44m#{s}#{NORMAL}" end
-  def self.title(s) "\e[30m\e[47m#{s}#{NORMAL}" end
-end
-
 class State
   DATA_PATH = File.join(File.expand_path(File.dirname(__FILE__)), 'state.json')
   def self.DATA_PATH
@@ -28,7 +19,7 @@ class State
       data = JSON.parse(File.read(DATA_PATH))
       State.new(data['followers'])
     rescue Errno::ENOENT
-      puts Color::warn("Could not find data file; using default state!")
+      puts "Could not find data file; using default state!"
       State.new({})
     end
   end
@@ -56,8 +47,6 @@ class State
 end
 
 def main
-  puts Color::title(" #{Time.now.utc} ")
-
   puts "Loading state from #{State::DATA_PATH}"
   state = State.load
 
@@ -90,7 +79,7 @@ def main
     unfollowers.sort_by { |id, user| user['screen_name'] }.each do |id, user|
       message << "\n • #{user['name']} (@#{user['screen_name']})"
     end
-    puts Color::error(message)
+    puts message
     client.create_direct_message(target_user, message)
   else
     puts "No defectors found 🙃"
@@ -105,7 +94,7 @@ if __FILE__ == $0
     main
   rescue
     puts  # Make sure the stack trace is on a separate line
-    puts Color::fatal(" 🚫 ERROR! 🚫 ")
+    puts " 🚫 ERROR! 🚫 "
     raise
   end
 end
