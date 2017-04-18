@@ -91,6 +91,7 @@ end
 
 if __FILE__ == $0
   begin
+    STDOUT.sync = true
     main
   rescue
     puts  # Make sure the stack trace is on a separate line
