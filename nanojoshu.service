@@ -1,0 +1,12 @@
+[Unit]
+Description=Assistant Nano
+After=network.target
+
+[Service]
+ExecStart=/srv/nanojoshu/run.sh
+EnvironmentFile=/etc/environment
+WorkingDirectory=/srv/nanojoshu
+User=chris
+
+[Install]
+WantedBy=multi-user.target
